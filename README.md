@@ -1,8 +1,8 @@
-# awe-idea
+# awe-idea快速开发框架（admin_web + rest_ful_api + schedule_web + user_web）
 
 #### 介绍Spring-MVC + Mybatis + Shiro + Quartz + Druid + Swagger
 
-页面结构来自人人开源框架，精简改造而来，快速开发  
+页面结构来自人人开源框架，精简改造而来，快速开发,适用于中小企业  
 合理分层，开箱即用，admin管理和quartz自动任务分开 ,用户移动端api(jwttoken验证+输入参数输出结果AES加密)  
 本地存储/redis存储 切换，共享session,sso单点登录   ok  
 分布式锁zookeeper     ok  
