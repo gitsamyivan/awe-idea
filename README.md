@@ -1,4 +1,4 @@
-# awe-idea快速开发框架（admin_web + rest_ful_api + schedule_web + user_web）
+# awe-idea快速开发框架（admin_web + restful_api + schedule_web + user_web）
 
 #### 介绍Spring-MVC + Mybatis + Shiro + Quartz + Druid + Swagger
 
@@ -18,6 +18,7 @@
 JDK1.8  
 MySQL5.5+  
 Maven3.0+  
+Tomcat8.5.16  
 
 项目架构：  
 awe-parent        <------> 根项目  
@@ -31,8 +32,15 @@ awe-service       <------> 公共服务模块，数据持久层crud, dao，entit
 awe-web           <------> 前台用户web页面，session存储redis共享+sso单点登录  
 
 
+默认账号密码：admin/admin  
 
+项目地址：  
+gitee:   https://gitee.com/sam9527/awe-idea  
+github:  https://github.com/gitsamyivan/awe-idea 
 
+![](doc/image0.png)
+![](doc/image1.png)
+![](doc/image2.png)   
 
 
 
