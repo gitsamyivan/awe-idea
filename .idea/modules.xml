@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/awe-admin/awe-admin.iml" filepath="$PROJECT_DIR$/awe-admin/awe-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awe-admin-batch/awe-admin-batch.iml" filepath="$PROJECT_DIR$/awe-admin-batch/awe-admin-batch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awe-admin-shiro/awe-admin-shiro.iml" filepath="$PROJECT_DIR$/awe-admin-shiro/awe-admin-shiro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awe-api/awe-api.iml" filepath="$PROJECT_DIR$/awe-api/awe-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awe-common/awe-common.iml" filepath="$PROJECT_DIR$/awe-common/awe-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awe-gen/awe-gen.iml" filepath="$PROJECT_DIR$/awe-gen/awe-gen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awe-parent.iml" filepath="$PROJECT_DIR$/awe-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awe-service/awe-service.iml" filepath="$PROJECT_DIR$/awe-service/awe-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awe-web/awe-web.iml" filepath="$PROJECT_DIR$/awe-web/awe-web.iml" />
+    </modules>
+  </component>
+</project>

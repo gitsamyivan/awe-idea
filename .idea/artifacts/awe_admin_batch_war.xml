@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="awe-admin-batch:war">
+    <output-path>$PROJECT_DIR$/awe-admin-batch/target</output-path>
+    <root id="archive" name="awe-admin-batch-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="awe-admin-batch:war exploded" />
+    </root>
+  </artifact>
+</component>

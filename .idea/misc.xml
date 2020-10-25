@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://E:/Code_Workspace/DownloadCode/SpringMVC-Mybatis-Shiro-redis-0.2-master" />
+    <file type="web" url="file://$PROJECT_DIR$/awe-admin" />
+    <file type="web" url="file://$PROJECT_DIR$/awe-admin-batch" />
+    <file type="web" url="file://$PROJECT_DIR$/awe-api" />
+    <file type="web" url="file://$PROJECT_DIR$/awe-web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/awe-batchjob/pom.xml" />
+        <option value="$PROJECT_DIR$/awe-admin-batch/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/awe-admin-sso/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="jdk1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

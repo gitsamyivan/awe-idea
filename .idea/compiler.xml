@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="awe-admin" />
+        <module name="awe-admin-batch" />
+        <module name="awe-admin-shiro" />
+        <module name="awe-api" />
+        <module name="awe-batchjob" />
+        <module name="awe-common" />
+        <module name="awe-gen" />
+        <module name="awe-service" />
+        <module name="awe-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="awe-admin" target="1.8" />
+      <module name="awe-admin-batch" target="1.8" />
+      <module name="awe-admin-shiro" target="1.8" />
+      <module name="awe-api" target="1.8" />
+      <module name="awe-batchjob" target="1.8" />
+      <module name="awe-common" target="1.8" />
+      <module name="awe-gen" target="1.8" />
+      <module name="awe-parent" target="1.8" />
+      <module name="awe-service" target="1.8" />
+      <module name="awe-web" target="1.8" />
+      <module name="bootshiro" target="1.8" />
+      <module name="redis-tx-demo" target="1.8" />
+      <module name="scheduler" target="1.8" />
+      <module name="shiro-jwt-demo" target="1.8" />
+      <module name="shiro.demo" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
