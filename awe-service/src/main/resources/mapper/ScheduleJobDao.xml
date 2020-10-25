@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="awe.idea.com.service.dao.ScheduleJobDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="awe.idea.com.service.entity.ScheduleJobEntity" id="scheduleJobMap">
+        <result property="jobId" column="job_id"/>
+        <result property="beanName" column="bean_name"/>
+        <result property="methodName" column="method_name"/>
+        <result property="params" column="params"/>
+        <result property="cronExpression" column="cron_expression"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="awe.idea.com.service.entity.ScheduleJobEntity">
+		select
+			`job_id` as jobId ,
+			`bean_name` as beanName ,
+			`method_name` as methodName ,
+			`params` as params ,
+			`cron_expression` as cronExpression ,
+			`status` as status ,
+			`remark` as remark ,
+			`create_time` as createTime
+		from schedule_job where job_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="awe.idea.com.service.entity.ScheduleJobEntity">
+		select
+		`job_id` as jobId ,
+		`bean_name` as beanName ,
+		`method_name` as methodName ,
+		`params` as params ,
+		`cron_expression` as cronExpression ,
+		`status` as status ,
+		`remark` as remark ,
+		`create_time` as createTime
+		from schedule_job
+		<where>
+			<if test="jobId != null"> `job_id` = #{jobId} </if>
+			<if test="beanName != null and beanName.trim() != ''"> and  `bean_name` = #{beanName} </if>
+			<if test="methodName != null and methodName.trim() != ''"> and  `method_name` = #{methodName} </if>
+			<if test="params != null"> and  `params` = #{params} </if>
+			<if test="cronExpression != null"> and  `cron_expression` = #{cronExpression} </if>
+			<if test="status != null"> and  `status` = #{status} </if>
+			<if test="remark != null"> and  `remark` = #{remark} </if>
+			<if test="createTime != null"> and  `create_time` = #{createTime} </if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by job_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from schedule_job
+		<where>
+			<if test="jobId != null"> `job_id` = #{jobId} </if>
+			<if test="beanName != null"> and  `bean_name` = #{beanName} </if>
+			<if test="methodName != null"> and  `method_name` = #{methodName} </if>
+			<if test="params != null"> and  `params` = #{params} </if>
+			<if test="cronExpression != null"> and  `cron_expression` = #{cronExpression} </if>
+			<if test="status != null"> and  `status` = #{status} </if>
+			<if test="remark != null"> and  `remark` = #{remark} </if>
+			<if test="createTime != null"> and  `create_time` = #{createTime} </if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="awe.idea.com.service.entity.ScheduleJobEntity" useGeneratedKeys="true" keyProperty="jobId">
+		insert into schedule_job
+		(
+			`bean_name`, 
+			`method_name`, 
+			`params`, 
+			`cron_expression`, 
+			`status`, 
+			`remark`, 
+			`create_time`
+		)
+		values
+		(
+			#{beanName}, 
+			#{methodName}, 
+			#{params}, 
+			#{cronExpression}, 
+			#{status}, 
+			#{remark}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="awe.idea.com.service.entity.ScheduleJobEntity">
+		update schedule_job 
+		<set>
+			<if test="beanName != null">`bean_name` = #{beanName}, </if>
+			<if test="methodName != null">`method_name` = #{methodName}, </if>
+			<if test="params != null">`params` = #{params}, </if>
+			<if test="cronExpression != null">`cron_expression` = #{cronExpression}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where job_id = #{jobId}
+	</update>
+
+	<!-- 批量更新状态 -->
+	<update id="updateBatch">
+		update schedule_job set status = #{status} where job_id in
+		<foreach item="jobId" collection="list"  open="(" separator="," close=")">
+			#{jobId}
+		</foreach>
+	</update>
+	
+	<delete id="delete">
+		delete from schedule_job where job_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from schedule_job where job_id in 
+		<foreach item="jobId" collection="array" open="(" separator="," close=")">
+			#{jobId}
+		</foreach>
+	</delete>
+
+</mapper>

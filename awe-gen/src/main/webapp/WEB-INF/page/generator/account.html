@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			#if($shiro.hasPermission("account:save"))
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			#end
+			#if($shiro.hasPermission("account:update"))
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			#end
+			#if($shiro.hasPermission("account:delete"))
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			#end
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+											<div class="form-group">
+			   	<div class="col-sm-2 control-label">系统对应的用户id</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.userId" placeholder="系统对应的用户id"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">账户名称</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.accountName" placeholder="账户名称"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">账户类型（1.管理员 2.商务 3站长 4客户）</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.accountType" placeholder="账户类型（1.管理员 2.商务 3站长 4客户）"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">所属上级账户id</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.parentAccountId" placeholder="所属上级账户id"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">账户当前所有的金额</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.accountAmount" placeholder="账户当前所有的金额"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">账户状态</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.accountStatus" placeholder="账户状态"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">用户的公司地址或者家庭地址</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.address" placeholder="用户的公司地址或者家庭地址"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">创建时间</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.createTime" placeholder="创建时间"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">更新时间</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="account.updateTime" placeholder="更新时间"/>
+			    </div>
+			</div>
+							<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="${rc.contextPath}/js/generator/account.js?_${date.systemTime}"></script>
+</body>
+</html>

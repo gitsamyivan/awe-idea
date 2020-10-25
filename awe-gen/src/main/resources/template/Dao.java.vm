@@ -1,0 +1,17 @@
+package ${package}.dao;
+
+import org.mybatis.spring.annotation.MapperScan;
+import ${package}.entity.${className}Entity;
+import awe.idea.com.service.dao.BaseDao;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@MapperScan
+public interface ${className}Dao extends BaseDao<${className}Entity> {
+	
+}

@@ -1,0 +1,15 @@
+Application.java
+    main方法自动生成代码文件，修改当前工程物理路径根目录
+    String rootPath = System.getProperty("user.dir") + "\\awe-service\\src" ;
+
+/resources/template 代码velocity模板文件
+db.properties  数据库配置
+generator.properties 文件属性设置
+
+package=awe.idea.com.service
+tablePrefix=tb_
+
+生成代码目录：
+controller,dao,entity,service,
+/resources/mapper, /resources/sql,
+webapp/js/generator/,WEB-INF/page/generator/

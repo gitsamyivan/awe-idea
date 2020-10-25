@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="awe.idea.com.service.dao.AccountDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="awe.idea.com.service.entity.AccountEntity" id="accountMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="accountName" column="account_name"/>
+        <result property="accountType" column="account_type"/>
+        <result property="parentAccountId" column="parent_account_id"/>
+        <result property="accountAmount" column="account_amount"/>
+        <result property="accountStatus" column="account_status"/>
+        <result property="address" column="address"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="awe.idea.com.service.entity.AccountEntity">
+		select
+			`id` as id ,
+			`user_id` as userId ,
+			`account_name` as accountName ,
+			`account_type` as accountType ,
+			`parent_account_id` as parentAccountId ,
+			`account_amount` as accountAmount ,
+			`account_status` as accountStatus ,
+			`address` as address ,
+			`create_time` as createTime ,
+			`update_time` as updateTime
+		from tb_account where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="awe.idea.com.service.entity.AccountEntity">
+		select
+		`id` as id ,
+		`user_id` as userId ,
+		`account_name` as accountName ,
+		`account_type` as accountType ,
+		`parent_account_id` as parentAccountId ,
+		`account_amount` as accountAmount ,
+		`account_status` as accountStatus ,
+		`address` as address ,
+		`create_time` as createTime ,
+		`update_time` as updateTime
+		from tb_account
+		<where>
+			<if test="id != null"> `id` = #{id} </if>
+			<if test="userId != null"> and  `user_id` = #{userId} </if>
+			<if test="accountName != null"> and  `account_name` = #{accountName} </if>
+			<if test="accountType != null"> and  `account_type` = #{accountType} </if>
+			<if test="parentAccountId != null"> and  `parent_account_id` = #{parentAccountId} </if>
+			<if test="accountAmount != null"> and  `account_amount` = #{accountAmount} </if>
+			<if test="accountStatus != null"> and  `account_status` = #{accountStatus} </if>
+			<if test="address != null"> and  `address` = #{address} </if>
+			<if test="createTime != null"> and  `create_time` = #{createTime} </if>
+			<if test="updateTime != null"> and  `update_time` = #{updateTime} </if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_account
+		<where>
+			<if test="id != null"> `id` = #{id} </if>
+			<if test="userId != null"> and  `user_id` = #{userId} </if>
+			<if test="accountName != null"> and  `account_name` = #{accountName} </if>
+			<if test="accountType != null"> and  `account_type` = #{accountType} </if>
+			<if test="parentAccountId != null"> and  `parent_account_id` = #{parentAccountId} </if>
+			<if test="accountAmount != null"> and  `account_amount` = #{accountAmount} </if>
+			<if test="accountStatus != null"> and  `account_status` = #{accountStatus} </if>
+			<if test="address != null"> and  `address` = #{address} </if>
+			<if test="createTime != null"> and  `create_time` = #{createTime} </if>
+			<if test="updateTime != null"> and  `update_time` = #{updateTime} </if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="awe.idea.com.service.entity.AccountEntity">
+		insert into tb_account
+		(
+			`id`, 
+			`user_id`, 
+			`account_name`, 
+			`account_type`, 
+			`parent_account_id`, 
+			`account_amount`, 
+			`account_status`, 
+			`address`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{accountName}, 
+			#{accountType}, 
+			#{parentAccountId}, 
+			#{accountAmount}, 
+			#{accountStatus}, 
+			#{address}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="awe.idea.com.service.entity.AccountEntity">
+		update tb_account 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="accountName != null">`account_name` = #{accountName}, </if>
+			<if test="accountType != null">`account_type` = #{accountType}, </if>
+			<if test="parentAccountId != null">`parent_account_id` = #{parentAccountId}, </if>
+			<if test="accountAmount != null">`account_amount` = #{accountAmount}, </if>
+			<if test="accountStatus != null">`account_status` = #{accountStatus}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_account where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_account where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+
+	<update id="updateAccountAmount" parameterType="awe.idea.com.service.entity.AccountEntity">
+		update tb_account
+		<set>`update_time` = now(),
+			<if test="accountAmount != null">account_amount = account_amount+#{accountAmount} </if>
+		</set>
+		where id=#{id}
+	</update>
+
+	<select id="getAccountListByUserIdList" resultMap="accountMap">
+		select * from tb_account where user_id in
+		<foreach item="id" collection="userIdList" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+
+	<!-- 获取所有的商务账户 -->
+	<select id="getAllCommerceAccount" resultMap="accountMap">
+		select * from tb_account where account_type=2
+	</select>
+
+	<!-- 获取当前在职的商务账户 -->
+	<select id="getAllActiveCommerceAccount">
+		select * from tb_account where account_type=2 and account_status = 1
+	</select>
+
+	<select id="getAccountByUserId" resultMap="accountMap">
+		select * from tb_account where user_id = #{userId}
+	</select>
+
+	<select id="getActiveAccountOption" resultType="awe.idea.com.service.models.OptionVo">
+		select distinct(id) as value,account_name as showValue from tb_account where account_type=2 and account_status = 1
+	</select>
+
+</mapper>

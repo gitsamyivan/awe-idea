@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="awe.idea.com.service.dao.ScheduleJobLogDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="awe.idea.com.service.entity.ScheduleJobLogEntity" id="scheduleJobLogMap">
+        <result property="logId" column="log_id"/>
+        <result property="jobId" column="job_id"/>
+        <result property="beanName" column="bean_name"/>
+        <result property="methodName" column="method_name"/>
+        <result property="params" column="params"/>
+        <result property="status" column="status"/>
+        <result property="error" column="error"/>
+        <result property="times" column="times"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="awe.idea.com.service.entity.ScheduleJobLogEntity">
+		select
+			`log_id` as logId ,
+			`job_id` as jobId ,
+			`bean_name` as beanName ,
+			`method_name` as methodName ,
+			`params` as params ,
+			`status` as status ,
+			`error` as error ,
+			`times` as times ,
+			`create_time` as createTime
+		from schedule_job_log where log_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="awe.idea.com.service.entity.ScheduleJobLogEntity">
+		select
+		`log_id` as logId ,
+		`job_id` as jobId ,
+		`bean_name` as beanName ,
+		`method_name` as methodName ,
+		`params` as params ,
+		`status` as status ,
+		`error` as error ,
+		`times` as times ,
+		`create_time` as createTime
+		from schedule_job_log
+		<where>
+			<if test="logId != null"> `log_id` = #{logId} </if>
+			<if test="jobId != null  and jobId.trim() != ''"> and  `job_id` = #{jobId} </if>
+			<if test="beanName != null"> and  `bean_name` = #{beanName} </if>
+			<if test="methodName != null"> and  `method_name` = #{methodName} </if>
+			<if test="params != null"> and  `params` = #{params} </if>
+			<if test="status != null"> and  `status` = #{status} </if>
+			<if test="error != null"> and  `error` = #{error} </if>
+			<if test="times != null"> and  `times` = #{times} </if>
+			<if test="createTime != null"> and  `create_time` = #{createTime} </if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by log_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from schedule_job_log
+		<where>
+			<if test="logId != null"> `log_id` = #{logId} </if>
+			<if test="jobId != null"> and  `job_id` = #{jobId} </if>
+			<if test="beanName != null"> and  `bean_name` = #{beanName} </if>
+			<if test="methodName != null"> and  `method_name` = #{methodName} </if>
+			<if test="params != null"> and  `params` = #{params} </if>
+			<if test="status != null"> and  `status` = #{status} </if>
+			<if test="error != null"> and  `error` = #{error} </if>
+			<if test="times != null"> and  `times` = #{times} </if>
+			<if test="createTime != null"> and  `create_time` = #{createTime} </if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="awe.idea.com.service.entity.ScheduleJobLogEntity" useGeneratedKeys="true" keyProperty="logId">
+		insert into schedule_job_log
+		(
+			`job_id`, 
+			`bean_name`, 
+			`method_name`, 
+			`params`, 
+			`status`, 
+			`error`, 
+			`times`, 
+			`create_time`
+		)
+		values
+		(
+			#{jobId}, 
+			#{beanName}, 
+			#{methodName}, 
+			#{params}, 
+			#{status}, 
+			#{error}, 
+			#{times}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="awe.idea.com.service.entity.ScheduleJobLogEntity">
+		update schedule_job_log 
+		<set>
+			<if test="jobId != null">`job_id` = #{jobId}, </if>
+			<if test="beanName != null">`bean_name` = #{beanName}, </if>
+			<if test="methodName != null">`method_name` = #{methodName}, </if>
+			<if test="params != null">`params` = #{params}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="error != null">`error` = #{error}, </if>
+			<if test="times != null">`times` = #{times}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where log_id = #{logId}
+	</update>
+	
+	<delete id="delete">
+		delete from schedule_job_log where log_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from schedule_job_log where log_id in 
+		<foreach item="logId" collection="array" open="(" separator="," close=")">
+			#{logId}
+		</foreach>
+	</delete>
+
+</mapper>
