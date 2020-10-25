@@ -40,7 +40,12 @@ github:  https://github.com/gitsamyivan/awe-idea
 
 ![](doc/image0.png)
 ![](doc/image1.png)
-![](doc/image2.png)   
+![](doc/image2.png)  
+
+#感谢，如果觉得有用，请随意捐赠-。-  
+![](doc/ali-pay.jpg)
+![](doc/wechat-pay.jpg)
+
 
 
 
